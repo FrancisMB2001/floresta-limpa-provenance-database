@@ -1,0 +1,14 @@
+services:
+  neo4j:
+    image: neo4j:ubi9
+    container_name: neo4j-provenance
+    restart: unless-stopped
+    ports:
+      - "7474:7474"  # Browser UI
+      - "7687:7687"  # Bolt protocol
+    environment:
+      - NEO4J_AUTH=neo4j/floresta_limpa_2025  # username=neo4j, password=test123
+    volumes:
+      - ./neo4j_data:/data
+      - ./neo4j_logs:/logs
+      - ./neo4j_plugins:/plugins

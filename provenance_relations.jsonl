@@ -1,0 +1,6 @@
+{"id":"generated-bbc3368b-0a4c-41a3-9237-97fceb53e89b","relationType":"wasGeneratedBy","source":"file-request-bbc3368b-0a4c-41a3-9237-97fceb53e89b","target":"TimeSeriesGeneration-bbc3368b-0a4c-41a3-9237-97fceb53e89b"}
+{"id":"started-bbc3368b-0a4c-41a3-9237-97fceb53e89b","relationType":"wasStartedBy","source":"TimeSeriesGeneration-bbc3368b-0a4c-41a3-9237-97fceb53e89b","target":"user-30"}
+{"id":"gen-complete-bbc3368b-0a4c-41a3-9237-97fceb53e89b","relationType":"wasGeneratedBy","source":"file-request-bbc3368b-0a4c-41a3-9237-97fceb53e89b","target":"TimeSeriesIndexFileCompletion-bbc3368b-0a4c-41a3-9237-97fceb53e89b"}
+{"id":"assoc-worker-bbc3368b-0a4c-41a3-9237-97fceb53e89b","relationType":"wasAssociatedWith","source":"TimeSeriesIndexFileCompletion-bbc3368b-0a4c-41a3-9237-97fceb53e89b","target":"netcdf_worker_v1"}
+{"id":"started-bbc3368b-0a4c-41a3-9237-97fceb53e89b","relationType":"wasStartedBy","source":"FileRetrieval-bbc3368b-0a4c-41a3-9237-97fceb53e89b","target":"user-30"}
+{"id":"generated-bbc3368b-0a4c-41a3-9237-97fceb53e89b","relationType":"wasGeneratedBy","source":"file-bbc3368b-0a4c-41a3-9237-97fceb53e89b","target":"FileRetrieval-bbc3368b-0a4c-41a3-9237-97fceb53e89b"}
