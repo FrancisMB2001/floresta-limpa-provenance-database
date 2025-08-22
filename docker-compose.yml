@@ -7,8 +7,25 @@ services:
       - "7474:7474"  # Browser UI
       - "7687:7687"  # Bolt protocol
     environment:
-      - NEO4J_AUTH=neo4j/floresta_limpa_2025  # username=neo4j, password=test123
+      - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD:-floresta_limpa_2025}
     volumes:
       - ./neo4j_data:/data
       - ./neo4j_logs:/logs
       - ./neo4j_plugins:/plugins
+
+  importer:
+    build:
+      dockerfile: Dockerfile.provimport
+    container_name: provenance-importer
+    depends_on:
+      - neo4j
+    env_file:
+      - .env
+    volumes:
+      - ./importer_logs:/var/log   
+      - ${EXTERNAL_PROV_LOCATION_DIRECTORY:-./input_data}:/app/input
+    command: >
+      sh -c "sleep 20 &&
+             /usr/local/bin/python import_provenance.py &&
+             cron &&
+             tail -f /var/log/cron.log"

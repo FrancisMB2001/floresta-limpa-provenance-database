@@ -1,0 +1,30 @@
+FROM python:3.12
+
+# Install cron
+RUN apt-get update && apt-get install -y cron && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy dependencies and install them
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy script and environment
+COPY . .
+COPY .env .env
+
+# Make sure the script is executable
+RUN chmod +x import_provenance.py
+
+# (runs every day at 3AM)
+RUN echo "0 3 * * * cd /app && /usr/local/bin/python import_provenance.py >> /var/log/cron.log 2>&1" > /etc/cron.d/daily-task
+
+# Give execution rights and register it
+RUN chmod 0644 /etc/cron.d/daily-task && crontab /etc/cron.d/daily-task
+
+# Create log file for cron to write into
+RUN touch /var/log/cron.log
+
+# Run cron in the foreground so container stays alive
+# CMD ["cron", "-f"]
+CMD /usr/local/bin/python import_provenance.py && cron && tail -f /var/log/cron.log
