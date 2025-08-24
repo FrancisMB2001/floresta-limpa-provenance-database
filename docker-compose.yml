@@ -12,6 +12,8 @@ services:
       - ./neo4j_data:/data
       - ./neo4j_logs:/logs
       - ./neo4j_plugins:/plugins
+    networks:
+      - floresta_limpa_net
 
   importer:
     build:
@@ -29,3 +31,7 @@ services:
              /usr/local/bin/python import_provenance.py &&
              cron &&
              tail -f /var/log/cron.log"
+
+networks:
+  floresta_limpa_net:
+    driver: bridge
