@@ -31,6 +31,8 @@ services:
              /usr/local/bin/python import_provenance.py &&
              cron &&
              tail -f /var/log/cron.log"
+    networks:
+      - floresta_limpa_net
 
 networks:
   floresta_limpa_net:
